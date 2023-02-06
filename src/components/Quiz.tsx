@@ -1,62 +1,46 @@
-import React from "react";
-interface Option {
-  id: number;
-  text: string;
-  isCorrect: boolean;
-}
+export const Quiz = ({
+    currentQuestion,
+    questions,
+    handleAnswer,
+    finishedQuiz,
+    handleBackButton,
+}: any) => {
+    return (
+        <div className='card'>
+            <div className='card-heading'>
+                <h2>Question {currentQuestion + 1}</h2>
+            </div>
+            <div className='card-body'>
+                <h3>
+                    {questions.length > 0 && questions[currentQuestion].text}
+                </h3>
+            </div>
 
-interface Question {
-  text: string;
-  options: Option[];
-}
-
-const questions: Question[] = [
-  {
-    text: "-12 + 8 =",
-    options: [
-      { id: 0, text: "4", isCorrect: false },
-      { id: 1, text: "-4", isCorrect: true },
-      { id: 2, text: "-20", isCorrect: false },
-      { id: 3, text: "20", isCorrect: false },
-    ],
-  },
-  {
-    text: "-7 + -5 =",
-    options: [
-      { id: 0, text: "2", isCorrect: false },
-      { id: 1, text: "12", isCorrect: false },
-      { id: 2, text: "-12", isCorrect: true },
-      { id: 3, text: "-2", isCorrect: false },
-    ],
-  },
-  {
-    text: "-9 + 20 =",
-    options: [
-      { id: 0, text: "11", isCorrect: true },
-      { id: 1, text: "-29", isCorrect: false },
-      { id: 2, text: "-11", isCorrect: false },
-      { id: 3, text: "29", isCorrect: false },
-    ],
-  },
-  {
-    text: "18 + -3 =",
-    options: [
-      { id: 0, text: "15", isCorrect: true },
-      { id: 1, text: "-21", isCorrect: false },
-      { id: 2, text: "21", isCorrect: false },
-      { id: 3, text: "-15", isCorrect: false },
-    ],
-  },
-  {
-    text: "-9 - 10 =",
-    options: [
-      { id: 0, text: "-19", isCorrect: true },
-      { id: 1, text: "-1", isCorrect: false },
-      { id: 2, text: "19", isCorrect: false },
-      { id: 3, text: "1", isCorrect: false },
-    ],
-  },
-];
-export const Quiz = () => {
-  return <div>Quiz</div>;
+            <ul className='options'>
+                {questions.length > 0 &&
+                    questions[currentQuestion].options.map((option: any) => {
+                        return (
+                            <li
+                                className={
+                                    finishedQuiz && option.isCorrect
+                                        ? "correct"
+                                        : ""
+                                }
+                                key={option.id}
+                                onClick={() => {
+                                    handleAnswer(option.isCorrect);
+                                }}
+                            >
+                                {option.text}
+                            </li>
+                        );
+                    })}
+            </ul>
+            <div className='buttons'>
+                {currentQuestion > 0 && (
+                    <button onClick={handleBackButton}>Back</button>
+                )}
+            </div>
+        </div>
+    );
 };

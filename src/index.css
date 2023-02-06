@@ -43,12 +43,12 @@ h3 {
   border-radius: 10px;
 }
 
-.question-number {
+.card-heading {
   background-color: #243d9d;
   padding: 2rem;
   border-radius: 10px 10px 0 0;
 }
-.question {
+.card-body {
   padding: 2rem;
 }
 
@@ -63,6 +63,10 @@ li {
   background-color: #243d9d;
   border: 1px solid white;
   border-radius: 10px;
+}
+
+.correct {
+  background-color: green;
 }
 
 li:hover {
